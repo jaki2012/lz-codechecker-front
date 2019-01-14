@@ -3,12 +3,12 @@
     <div class="login-style">
     
         <div class="login-area">
-            <div style="margin-bottom:20px;font-size:17px;">代码质量评测系统登录</div>
+            <div id="login-title">代码质量评测系统登录</div>
             <el-input placeholder="用户名" v-model="userInput.username"></el-input>
             <el-input placeholder="密码" type="password" style="margin-top:30px;margin-bottom:20px;" v-model="userInput.password"></el-input>
-            <el-button type="primary" :loading="ifLoading" style="width:350px;" @click="checkPass()">登录</el-button>
+            <el-button type="primary" :loading="ifLoading" style="width:300px;" @click="checkPass()">登录</el-button>
         </div>
-        <div style="margin-top:10px;margin-left:200px;color:grey">powered by LabSSE Technologies</div>
+        <div id="copyright-tag">powered by LabSSE Technologies</div>
     
     </div>
 </template>
@@ -56,15 +56,27 @@ export default {
     text-align: center;
 }
 
+#login-title {
+    margin-bottom:20px;
+    font-size:16px;
+}
+
 .login-area {
     border-radius: 5px;
     -moz-border-radius: 5px;
     background-clip: padding-box;
-    width: 350px;
+    width: 300px;
     padding: 35px 35px 15px;
     background: #fff;
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
     display: inline-block
+}
+
+#copyright-tag {
+    color: #bbbaba;
+    font-size: 13px;
+    margin-top:10px;
+    margin-left:150px;
 }
 </style>

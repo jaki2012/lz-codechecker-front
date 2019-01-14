@@ -12,7 +12,7 @@
       </el-menu-item>
       <el-menu-item index="3">
         <i class="fa fa-code"></i>
-        <span slot="title">个人项目</span>
+        <span slot="title">项目仓库</span>
       </el-menu-item>
       <el-submenu index="1">
         <template slot="title">
