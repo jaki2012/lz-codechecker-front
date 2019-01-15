@@ -3,6 +3,7 @@
     <div class="login-style">
     
         <div class="login-area">
+            
             <div id="login-title">代码质量评测系统登录</div>
             <el-input placeholder="用户名" v-model="userInput.username"></el-input>
             <el-input placeholder="密码" type="password" style="margin-top:30px;margin-bottom:20px;" v-model="userInput.password"></el-input>
@@ -14,15 +15,17 @@
 </template>
 
 <script>
+import store from '@/vuex/store'
 export default {
     name: 'login',
+    store,
     components: {
     },
     data() {
         return {
             // mock login name and password
-            username: 'root',
-            password: '123456',
+            mockUsername: 'root',
+            mockPassword: '123456',
             userInput: {
                 username: '',
                 password: ''
@@ -33,10 +36,15 @@ export default {
     methods: {
         checkPass: function () {
             this.ifLoading = true;
-            if (this.userInput.username == this.username 
-                    && this.userInput.password == this.password) {
+            if (this.userInput.username == this.mockUsername 
+                    && this.userInput.password == this.mockPassword) {
                 this.ifLoading = false;
-                this.$router.push({ name: 'goods' })
+                store.commit('login')
+                this.$message({
+                    message: '您已登录成功',
+                    type: 'success'
+                });
+                this.$router.push({ name: 'home' })
             } else {
                 this.$message({
                     message: '账户或密码错误',

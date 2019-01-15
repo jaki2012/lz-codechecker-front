@@ -62,6 +62,9 @@
 </script>
 
 <style scoped>
+  .el-menu-vertical-demo {
+    min-height: 600px;
+  }
   .el-menu-item-group li {
     font-size: 13px;
     margin-left: 1em;

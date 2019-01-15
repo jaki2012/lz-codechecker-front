@@ -9,6 +9,7 @@
             <li @focus="donothing($event)" class="search-menu-item">
                 <el-input class="search-input disabled" placeholder="搜索使用文档" prefix-icon="el-icon-search"></el-input>
             </li>
+            
             <el-menu-item index="/">处理中心</el-menu-item>
 
             <el-submenu index="2" class="menu-item-with-badge" disabled>
@@ -33,7 +34,8 @@
                 </el-badge>
             </el-menu-item>
 
-            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">个人管理</a></el-menu-item>
+            <el-menu-item v-if="loginStatus" index="4"><a href="https://www.ele.me" target="_blank">个人管理</a></el-menu-item>
+            <el-menu-item v-else index="/login">登录/注册</a></el-menu-item>
             <el-menu-item class="nav-seperator" index="5">
                 <div class="nav-gap"></div>
             </el-menu-item>
@@ -50,12 +52,19 @@
 </template>
 
 <script>
+    import store from '@/vuex/store'
     export default {
+        store,
         data() {
             return {
                 activeIndex: '1',
                 activeIndex2: '1'
-            };
+            }
+        },
+        computed: {
+            loginStatus: function() {
+                return store.state.login
+            }
         },
         mounted() {
             document.getElementsByClassName("search-menu-item")[0].removeAttribute("tabindex")

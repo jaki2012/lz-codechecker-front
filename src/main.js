@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from './App.vue'
 import router from './router'
 import Input from 'element-ui'
@@ -8,6 +9,7 @@ Vue.config.productionTip = false
 
 // element-ui按需引入
 Vue.use(Input) // 输入框组件
+Vue.use(Vuex)
 
 new Vue({
   render: h => h(App),
