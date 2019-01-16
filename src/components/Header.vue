@@ -1,7 +1,8 @@
 <template>
     <header>
-        <img class="header-logo" src="@/assets/images/header-logo-trimmed.svg" alt="logo">
-        
+        <router-link to="/">
+            <img class="header-logo" src="@/assets/images/header-logo-trimmed.svg" alt="logo">
+        </router-link>
         <el-menu :default-active="activeIndex" class="el-menu-header" 
         menu-trigger="click" mode="horizontal" @select="handleSelect"
         router>

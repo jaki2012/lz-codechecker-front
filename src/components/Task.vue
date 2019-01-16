@@ -47,7 +47,8 @@
             </el-form>
             <!-- height: 固定表头 600px固定宽度可以产生滚动条 -->
             <!-- stripe：斑马表格 -->
-            <el-table ref="filterTable" :data="tableData" style="width: 100%" stripe>
+            <!-- border：表格带边框 -->
+            <el-table border stripe ref="filterTable" :data="tableData" style="width: 100%">
                 <el-table-column prop="id" label="作业编号" width="130">
                 </el-table-column>
                 <el-table-column prop="name" label="启动用户" width="100"></el-table-column>

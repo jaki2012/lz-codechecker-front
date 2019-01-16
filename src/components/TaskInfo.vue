@@ -1,13 +1,13 @@
 <template>
     <div>
         <el-row class="table-header">
-            <el-col :span="18">
+            <el-col :span="10">
                 <!-- 作业编号{{taskInfo.taskId}}- -->
                 <h2 id="table-name"><i class="el-icon-document"></i>作业编号{{taskInfo.taskId}}-评测情况汇总</h2>
             </el-col>
             <el-col class="table-operation-btn-group" :span="4">
                 <!-- TODO 收藏作业或分享作业 -->
-                <el-button class="table-operation-btn" type="warning" icon="el-icon-star-off" circle></el-button>
+                <el-button class="table-operation-btn" @click="handleFav" type="warning" icon="el-icon-star-off" circle></el-button>
                 <!-- TODO 按照这个模板（配置）重新开始作业 可以解决异常问题-->
                 <el-tooltip class="item" effect="light" content="快速重新执行" placement="top-start">
                     <el-button class="table-operation-btn" type="success" circle><i class="fa fa-repeat"></i></el-button>
@@ -110,17 +110,17 @@
                 </tr>
                 <tr>
                     <td>Sonarqube质量检测报表</td>
-                    <td><a :href="taskInfo.sonarqubeUrl">{{taskInfo.sonarqubeUrl}}</a></td>
+                    <td><router-link to="/">{{taskInfo.sonarqubeUrl}}</router-link></td>
                     <td> - </td>
                 </tr>
                 <tr>
                     <td>PMD代码风格检测报表</td>
-                    <td><a :href="taskInfo.pmdReportUrl">{{taskInfo.pmdReportUrl}}</a></td>
+                    <td><router-link to="/">{{taskInfo.pmdReportUrl}}</router-link></td>
                     <td> - </td>
                 </tr>
                 <tr>
                     <td>代码缺陷倾向性预测报表</td>
-                    <td><a :href="taskInfo.sdpReportUrl">{{taskInfo.sdpReportUrl}}</a></td>
+                    <td><router-link :to="{name:'sdpreport', params:{ id: taskInfo.taskId}}">{{taskInfo.sdpReportUrl}}</router-link></td>
                     <td>基于机器学习技术的静态缺陷预测（方法级别）</td>
                 </tr>
             </tbody>
@@ -152,9 +152,9 @@
                     taskDuration: '1min 4s',
                     overallScore: 4.2,
                     sonarqubeUrl: 'https://sonarqube.labsse.org/0001',
-                    pmdReportUrl: 'https://pmd.labsse.org/report/0001',
+                    pmdReportUrl: 'https://codeguard.labsse.org/task/0001/pmdreport',
                     // 机器预测报表
-                    sdpReportUrl: 'https://sdp.labsse.org/report/0001'
+                    sdpReportUrl: 'https://codeguard.labsse.org/task/0001/sdpreport'
                 }
             }
         },
@@ -183,6 +183,24 @@
                         type: 'info',
                         message: '已取消删除'
                     });
+                });
+            },
+            handleFav: function() {
+                let favIcon = document.getElementsByClassName("el-icon-star-off")[0]
+                let message = "收藏成功！"
+                if(undefined != favIcon) {
+                    favIcon.classList.remove("el-icon-star-off")
+                    favIcon.classList.add("el-icon-star-on")
+                } else {
+                    favIcon = document.getElementsByClassName("el-icon-star-on")[0]
+                    favIcon.classList.remove("el-icon-star-on")
+                    favIcon.classList.add("el-icon-star-off")
+                    message = "取消收藏成功！"
+                }
+                this.$notify({
+                    title: '成功',
+                    message: message,
+                    type: 'success'
                 });
             }
         }

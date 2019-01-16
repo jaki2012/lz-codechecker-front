@@ -7,6 +7,7 @@ import managed from '@/components/Managed'
 import analyze from '@/components/Analyze'
 import task from '@/components/Task'
 import taskInfo from '@/components/TaskInfo'
+import sdpReport from '@/components/SDPReport'
 
 Vue.use(Router)
 
@@ -51,6 +52,11 @@ export default new Router({
             path: '/task/:id',
             name: 'taskinfo',
             component: taskInfo
+        },
+        {
+            path: '/task/:id/sdpreport/',
+            name: 'sdpreport',
+            component: sdpReport
         }
     ]
 })
