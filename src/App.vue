@@ -7,11 +7,11 @@
     <el-container>
       <!-- 侧栏 -->
       <el-aside width="18%">
-        <sidebar></sidebar>
+        <sidebar class="sidebar"></sidebar>
       </el-aside>
       <!-- 主要区域 -->
       <el-main id="app">
-        <router-view></router-view>
+        <router-view class="content"></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -40,12 +40,18 @@
 
   .el-header {
     margin-bottom: 20px;
+    /* padding: 0; */
   }
 
   #app {
     text-align: center;
     color: #2c3e50;
     /* margin-top: 60px; */
+    padding-top: 0;
+  }
+
+  .sidebar, .content {
+    padding: 50px 0;
   }
   
   /* 使得fontawesome图标与ElementUI图标一致 */

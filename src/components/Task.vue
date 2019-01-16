@@ -14,16 +14,16 @@
                 <!-- 4 * 5{span} + 4 * 1{offset} -->
                 <el-col :span="5" :class="{'second-row':index >= 4}" v-for="(o, index) in 5" :pull="1" :key="o" :offset="1">
                     <el-card :body-style="{ padding: '0px' }">
-                        <img width="80%" src="@/assets/images/python-logo.png" class="image">
+                        <img width="80%" src="@/assets/images/golang-logo.png" class="image">
                         <div class="task-info">
-                            <span class="project-name">xietiandi/go-demo-proj</span>
+                            <span class="project-name">xietiandi/go-demo-project</span>
                             <br>
                             <span class="progress-span">进度：</span>
                             <el-progress :percentage="89"></el-progress>
                             <div class="bottom clearfix">
                                 <time class="time">{{ currentDate }}</time>
                                 <el-button style="margin-left:5px" type="text" class="button">取消</el-button>
-                                <el-button type="text" class="button">详情</el-button>
+                                <el-button type="text" @click="jumpToInfo(1)" class="button">详情</el-button>
                             </div>
                         </div>
                     </el-card>
@@ -39,7 +39,9 @@
             <el-button @click="clearFilter">清除所有过滤器</el-button> -->
             <el-form class="search-form" ref="form" :model="form" label-width="80px">
                 <el-form-item>
-                    <el-input class="search-input" v-model="form.name" placeholder="请输入项目名称..." prefix-icon="el-icon-search"></el-input>
+                    <!-- 前置搜索图标 prefix-icon="el-icon-search" --> 
+                    <!-- 后置搜索图标 suffix-icon="el-icon-search" --> 
+                    <el-input class="search-input" v-model="form.name" placeholder="请输入项目名称..."></el-input>
                     <el-button class="search-button" type="primary" icon="el-icon-search">搜索</el-button>
                 </el-form-item>
             </el-form>
@@ -72,7 +74,8 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+                        <!-- button采用函数方式跳转 不要嵌套router-link 否则会造成跳转链接无反应的异常 -->
+                        <el-button size="mini" @click="jumpToInfo('0001')">详情</el-button>
                         <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
@@ -217,6 +220,9 @@
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
+            },
+            jumpToInfo(taskID) {
+                this.$router.push({ name:'taskinfo', params:{id:taskID}})
             }
         }
     };
@@ -247,6 +253,12 @@
     .task-info {
         padding: 14px;
         text-align: left;
+    }
+
+    /* 详情按钮的字体样式 */
+    .toTaskInfoLink {
+        color: #606266;
+        text-decoration: none;
     }
 
     .el-col.second-row {
@@ -291,11 +303,13 @@
 
     .progress-span {
         font-size: 12.4px;
+        font-style: italic;
         width: 10%;
     }
 
-    .el-progress>>>.el-progress__text {
-        margin-left: 15px;
+    .el-progress >>>.el-progress__text {
+        margin-left: 20px;
+        font-style: italic;
         font-size: 12.4px !important;
     }
 

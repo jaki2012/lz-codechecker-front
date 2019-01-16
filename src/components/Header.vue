@@ -57,7 +57,7 @@
         store,
         data() {
             return {
-                activeIndex: '1',
+                activeIndex: '/',
                 activeIndex2: '1'
             }
         },

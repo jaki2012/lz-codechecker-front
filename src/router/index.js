@@ -6,6 +6,7 @@ import external from '@/components/External'
 import managed from '@/components/Managed'
 import analyze from '@/components/Analyze'
 import task from '@/components/Task'
+import taskInfo from '@/components/TaskInfo'
 
 Vue.use(Router)
 
@@ -45,6 +46,11 @@ export default new Router({
             path: '/task',
             name: 'task',
             component: task
+        },
+        {
+            path: '/task/:id',
+            name: 'taskinfo',
+            component: taskInfo
         }
     ]
 })
