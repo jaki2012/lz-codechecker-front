@@ -110,7 +110,7 @@
                 </tr>
                 <tr>
                     <td>Sonarqube质量检测报表</td>
-                    <td><router-link to="/">{{taskInfo.sonarqubeUrl}}</router-link></td>
+                    <td><router-link :to="taskInfo.sonarqubeReportUrl">{{taskInfo.sonarqubeUrl}}</router-link></td>
                     <td> - </td>
                 </tr>
                 <tr>
@@ -152,6 +152,7 @@
                     taskDuration: '1min 4s',
                     overallScore: 4.2,
                     sonarqubeUrl: 'https://sonarqube.labsse.org/0001',
+                    sonarqubeReportUrl:  '/task/' + this.taskID + '/report/overviewlist',
                     pmdReportUrl: 'https://codeguard.labsse.org/task/0001/pmdreport',
                     // 机器预测报表
                     sdpReportUrl: 'https://codeguard.labsse.org/task/0001/sdpreport'
