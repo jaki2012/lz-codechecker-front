@@ -24,8 +24,10 @@ export default {
     data() {
         return {
             // mock login name and password
-            mockUsername: 'root',
-            mockPassword: '123456',
+            // mockUsername: 'root',
+            // mockPassword: '123456',
+            mockUsername: 'cloud_user1',
+            mockPassword: '222222',
             userInput: {
                 username: '',
                 password: ''

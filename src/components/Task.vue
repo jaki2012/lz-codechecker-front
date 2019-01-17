@@ -1,12 +1,14 @@
 <template>
     <div>
         <!-- TODO：面包屑与导航栏关联 以动态变化 -->
+        <!-- TODO：包括面包屑以内的"组件化" 组件化是一个好思想 面向接口编程也是 -->
         <el-breadcrumb class="breadcrumb" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>处理中心</el-breadcrumb-item>
             <el-breadcrumb-item>代码卫士</el-breadcrumb-item>
             <el-breadcrumb-item>作业一览</el-breadcrumb-item>
-            <el-breadcrumb-item>历史记录</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="displayType === 'in-progress'">正在进行</el-breadcrumb-item>
+            <el-breadcrumb-item v-else>历史记录</el-breadcrumb-item>
         </el-breadcrumb>
         <div v-if="displayType === 'in-progress'">
             <el-row class="tac">
@@ -14,7 +16,7 @@
                 <!-- 4 * 5{span} + 4 * 1{offset} -->
                 <el-col :span="5" :class="{'second-row':index >= 4}" v-for="(o, index) in 5" :pull="1" :key="o" :offset="1">
                     <el-card :body-style="{ padding: '0px' }">
-                        <img width="80%" src="@/assets/images/golang-logo.png" class="image">
+                        <img width="80%" src="@/assets/images/programming-language-logos/java-logo.png" class="image">
                         <div class="task-info">
                             <span class="project-name">xietiandi/go-demo-project</span>
                             <br>
@@ -106,8 +108,10 @@
             var day = date.getDate();
             var h = date.getHours();
             var m = date.getMinutes();
+            // 作为前缀补零
+            var mprefix = m > 10 ? '' : '0'
             return {
-                currentDate: `${year}-${month + 1}-${day} ${h}:${m}`,
+                currentDate: `${year}-${month + 1}-${day} ${h}:${mprefix}${m}`,
                 tableData: [{
                         id: "TASK-00000001",
                         date: "2016-05-02 12:30:29",

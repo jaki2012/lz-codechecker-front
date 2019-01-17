@@ -37,10 +37,13 @@
 
             <el-menu-item v-if="loginStatus" index="4"><a href="https://www.ele.me" target="_blank">个人管理</a></el-menu-item>
             <el-menu-item v-else index="/login">登录/注册</a></el-menu-item>
+            
             <el-menu-item class="nav-seperator" index="5">
                 <div class="nav-gap"></div>
             </el-menu-item>
-            
+            <el-menu-item v-if="loginStatus" index="8">
+                <i @click="handleLogOut" class="fa fa-sign-out"></i>
+            </el-menu-item>
             <!-- 参考阿里云控制台 -->
             <el-submenu :hide-timeout=200 index="6">
                 <template class="el-submenu" slot="title">简体中文</template>
@@ -77,6 +80,14 @@
             donothing(event) {
                 return
                 console.log(event.cancelBubble=true)
+            },
+            handleLogOut() {
+                store.commit("logout")
+                this.$message({
+                    message: '您已成功退出登录',
+                    type: 'success'
+                });
+                this.$router.push({ name: 'home' })
             }
         }
     }

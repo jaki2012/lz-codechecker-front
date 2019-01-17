@@ -9,12 +9,14 @@
             </el-col>
         </el-row>
         <el-form class="search-form" ref="form" :model="form" label-width="80px">
-                <el-form-item>
-                    <!-- 前置搜索图标 prefix-icon="el-icon-search" --> 
-                    <!-- 后置搜索图标 suffix-icon="el-icon-search" --> 
-                    <el-input class="search-input" v-model="form.name" placeholder="请输入文件或模块名称..."></el-input>
-                    <el-button class="search-button" type="primary" icon="el-icon-search">搜索</el-button>
-                </el-form-item>
+            <el-form-item>
+                <!-- 前置搜索图标 prefix-icon="el-icon-search" -->
+                <!-- 后置搜索图标 suffix-icon="el-icon-search" -->
+                <!-- TODO:方法所在的行数 -->
+                <!-- TODO:根据方法数量排序，根据缺陷方法比例排序，根据缺陷方法数量排序 升序或降序 -->
+                <el-input class="search-input" v-model="form.name" placeholder="请输入文件或模块名称..."></el-input>
+                <el-button class="search-button" type="primary" icon="el-icon-search">搜索</el-button>
+            </el-form-item>
         </el-form>
         <!-- 手风琴模式下accordion 一次最多展开一个框 -->
         <el-collapse v-model="activeFileId" accordion>
@@ -89,9 +91,14 @@
                         </el-collapse-item>
                     </el-collapse>
                 </li>
-
             </el-collapse-item>
         </el-collapse>
+        <div class="block">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+            </el-pagination>
+        </div>
     </div>
 </template>
 
@@ -100,7 +107,8 @@
         data() {
             return {
                 taskId: this.$route.params.id,
-                activeFileId: 1,
+                // activeFileId: 1,
+                activeFileId: 9,
                 activeModuleId: '',
                 // activeModuleId: '1.2',
                 form: {
@@ -134,18 +142,29 @@
                 }, {
                     id: 4,
                     name: 'filename4',
-                }]
+                }],
+                currentPage1: 5,
+                currentPage2: 5,
+                currentPage3: 5,
+                currentPage4: 4
             }
         },
         methods: {
             backToPrevPage: function () {
                 this.$router.back(-1)
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
             }
         }
     }
 </script>
 
 <style scoped>
+    /* TODO:CSS全部改成SASS */
     .table-header {
         /* 99% + 1% margin left */
         width: 100%;
@@ -165,12 +184,12 @@
     }
 
     /* 修改fa样式以适配element-ui的icon图标 */
-    .table-operation-btn >>> span {
+    .table-operation-btn>>>span {
         height: 14px;
         display: inline-block;
     }
 
-    .table-operation-btn >>> .fa {
+    .table-operation-btn>>>.fa {
         margin-right: 0;
         width: 14px;
     }
@@ -186,6 +205,7 @@
     .search-form {
         text-align: right;
     }
+
     .search-input {
         width: 20%;
     }
@@ -244,8 +264,8 @@
         border-collapse: collapse;
         margin: 0 auto;
         margin-top: 5px;
-        line-height: 2em; 
-        border:1px;
+        line-height: 2em;
+        border: 1px;
         border-color: #d8d8d8;
         /* border-top: none; */
         width: 98%;
@@ -272,5 +292,9 @@
     .metric-table th:nth-child(3),
     .metric-table td:nth-child(3) {
         width: 30%;
+    }
+
+    .block {
+        margin-top: 50px;
     }
 </style>
