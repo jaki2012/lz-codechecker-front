@@ -1,7 +1,6 @@
 <template>
     <!--登录页面-->
     <div class="login-style">
-    
         <div class="login-area">
             
             <div id="login-title">代码质量评测系统登录</div>
@@ -62,7 +61,7 @@ export default {
 <style scoped>
 
 .login-style {
-    padding-top: 60px;
+    padding-top: 15%;
     text-align: center;
 }
 

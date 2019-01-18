@@ -2,12 +2,14 @@
     <div>
         <el-container>
             <el-header>
-                <el-menu default-active="1" class="el-menu-demo" mode="horizontal">
-                    <el-menu-item index="1">
-                        <router-link :to="categoryHrefs.overviewlistHref">Overview</router-link>
+                <!-- TODO：解决路径不一致问题 -->
+                <el-menu :default-active="categoryHrefs.overviewlistHref" class="el-menu-demo" router mode="horizontal">
+                    <el-menu-item :index="categoryHrefs.overviewlistHref">
+                        Overview
                     </el-menu-item>
-                    <el-menu-item index="2">
-                        <router-link :to="categoryHrefs.issuesHref">Issues</router-link>
+                    <el-menu-item :index="categoryHrefs.issuesHref">
+                        <!-- router-link只在点击a链接的时候生效 且会出现下划线 -->
+                        Issues
                     </el-menu-item>
                     <el-submenu index="3">
                         <template slot="title">Security Reports</template>

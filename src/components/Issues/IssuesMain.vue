@@ -1,20 +1,25 @@
 <template>
     <el-container>
-        <el-aside width="200px">
+        <el-aside width="210px">
             <el-menu :default-openeds="openindex" v-model="issuetype">
                 <el-submenu v-for="value in typedatas" :index="value.index">
                     <template slot="title">{{value.type}}</template>
                     <el-menu-item-group>
+                        <!-- filter 完善 -->
                         <el-menu-item v-for="childvalue in value.children" :index="childvalue.index"
-                                      @click="typechange(childvalue.type,value.index)">{{childvalue.type}}
+                                      @click="typechange(childvalue.type,value.index)">
+                                      <!-- TODO: 提示数量 -->
+                                      <!-- <el-badge :value="3" class="item"> -->
+                                          {{childvalue.type}}
+                                      <!-- </el-badge> -->
                         </el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
-
             </el-menu>
         </el-aside>
         <el-main>
-            <div v-for="issueDetail in issueList" class="issuelist">
+            <!-- TODO:分页 -->
+            <div v-for="(issueDetail, index) in issueList" v-if="index < 7" class="issuelist">
                 <IssueItem :issue-detail="issueDetail" class="issue-item"></IssueItem>
             </div>
         </el-main>
@@ -72,7 +77,7 @@
     }
 
     .el-menu-item {
-        font-size: 10px;
+        font-size: 12px;
         max-height: 50px;
     }
 

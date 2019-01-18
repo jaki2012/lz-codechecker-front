@@ -12,16 +12,34 @@
         </el-breadcrumb>
         <div v-if="displayType === 'in-progress'">
             <el-row class="tac">
-                <!-- offset代表栅格左侧的间隔格数 offset占24列中的一部分 -->
-                <!-- 4 * 5{span} + 4 * 1{offset} -->
-                <el-col :span="5" :class="{'second-row':index >= 4}" v-for="(o, index) in 5" :pull="1" :key="o" :offset="1">
+                <el-col :span="5" :pull="1" :offset="1">
                     <el-card :body-style="{ padding: '0px' }">
-                        <img width="80%" src="@/assets/images/programming-language-logos/java-logo.png" class="image">
+                        <img width="170px" src="@/assets/images/programming-language-logos/java-logo.png" class="image">
+                        <!-- <img v-if="index!=0" width="80%" src="@/assets/images/programming-language-logos/golang-logo.png" class="image"> -->
                         <div class="task-info">
-                            <span class="project-name">xietiandi/go-demo-project</span>
+                            <span class="project-name">xietiandi/code-analyze</span><i class="loading-icon el-icon-loading"></i>
                             <br>
                             <span class="progress-span">进度：</span>
-                            <el-progress :percentage="89"></el-progress>
+                            <el-progress :percentage="70"></el-progress>
+                            <div class="bottom clearfix">
+                                <time class="time">{{ currentDate }}</time>
+                                <el-button style="margin-left:5px" type="text" class="button">取消</el-button>
+                                <el-button type="text" @click="jumpToInfo(1)" class="button">详情</el-button>
+                            </div>
+                        </div>
+                    </el-card>
+                </el-col>
+                <!-- offset代表栅格左侧的间隔格数 offset占24列中的一部分 -->
+                <!-- 4 * 5{span} + 4 * 1{offset} -->
+                <el-col :span="5" :class="{'second-row':index >= 3}" v-for="(o, index) in ongoingNumbers" :pull="1" :key="o" :offset="1">
+                    <el-card :body-style="{ padding: '0px' }">
+                        <img width="170px" src="@/assets/images/programming-language-logos/golang-logo.png" class="image">
+                        <!-- <img v-if="index!=0" width="80%" src="@/assets/images/programming-language-logos/golang-logo.png" class="image"> -->
+                        <div class="task-info">
+                            <span class="project-name">xietiandi/go-demo-project</span><i class="loading-icon el-icon-loading"></i>
+                            <br>
+                            <span class="progress-span">进度：</span>
+                            <el-progress :percentage="randomProgress[index]"></el-progress>
                             <div class="bottom clearfix">
                                 <time class="time">{{ currentDate }}</time>
                                 <el-button style="margin-left:5px" type="text" class="button">取消</el-button>
@@ -55,7 +73,6 @@
                 </el-table-column>
                 <el-table-column prop="name" label="启动用户" width="100"></el-table-column>
                 <el-table-column prop="address" label="项目名称及分支" :formatter="formatter"></el-table-column>
-                
                 <el-table-column label="作业状态" width="120">
                     <template slot-scope="scope">
                         <el-popover trigger="hover" placement="top">
@@ -189,7 +206,8 @@
                 currentPage4: 4,
                 form: {
                     name: '',
-                }
+                },
+                ongoingNumbers: 5
             };
         },
         computed: {
@@ -201,6 +219,13 @@
                 } else {
                     return "error";
                 }
+            },
+            randomProgress: function() {
+                let rndProgress = []
+                for(let i=0; i<5; i++) {
+                    rndProgress.push(Math.floor(Math.random()*(99+1)))
+                }
+                return rndProgress
             }
         },
         methods: {
@@ -260,6 +285,11 @@
         text-align: left;
     }
 
+    .loading-icon {
+        margin-left:3px;
+        vertical-align: middle;
+    }
+
     /* 详情按钮的字体样式 */
     .toTaskInfoLink {
         color: #606266;
@@ -287,6 +317,8 @@
 
     .image {
         width: 100%;
+        /* 统一高度以防止发生错位 */
+        height: 170px;
         display: block;
     }
 

@@ -1,16 +1,17 @@
 <template>
     <div>
         <el-container>
-            <el-header class="overview-title">Bugs and Vunerables</el-header>
+            <el-header class="overview-title">{{overviewItems.title}}</el-header>
             <el-main>
                 <el-container>
-                    <div v-for="overviewItem in overviewItems">
+                    <div v-for="(overviewItem, index) in overviewItems.blocks" :key="index">
                         <el-card class="overview-card">
                             <div slot="header" class="clearfix">
                                 <span>{{overviewItem.title}}</span>
                             </div>
                             <div>
-                                <a :href="overviewItem.numLink">{{overviewItem.num}}</a>
+                                <el-tag>{{overviewItem.num}}</el-tag>
+                                <!-- <a :href="overviewItem.numLink"></a> -->
                             </div>
                             <div>
                                 {{overviewItem.tag}}
@@ -47,11 +48,30 @@
         },
         name: "overview",
         props: {
-            overviewItems: []
-        }
+            overviewItems: {}
+        },
+        // watch: {
+        //     overviewItems: f
+        // }
     }
 </script>
 
 <style scoped>
+    .overview-title {
+        margin-bottom:0;
+        height: 40px!important;
+    }
+    a {
+        color: #409eff;
+        text-decoration: none;
+    }
 
+    a:hover {
+        color: #60d1e6;
+    }
+
+    .el-tag {
+        font-size:1.5em;
+        margin-bottom:0.3em;
+    }
 </style>
