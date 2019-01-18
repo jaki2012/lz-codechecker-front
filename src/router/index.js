@@ -8,6 +8,9 @@ import analyze from '@/components/Analyze'
 import task from '@/components/Task'
 import taskInfo from '@/components/TaskInfo'
 import sdpReport from '@/components/SDPReport'
+import CheckProjectResult from '@/components/CheckProjectResult'
+import OverviewList from '@/components/overview/OverviewList'
+import IssuesMain from '@/components/issues/IssuesMain'
 
 Vue.use(Router)
 
@@ -51,12 +54,31 @@ export default new Router({
         {
             path: '/task/:id',
             name: 'taskinfo',
-            component: taskInfo
+            component: taskInfo,
         },
         {
             path: '/task/:id/sdpreport/',
             name: 'sdpreport',
             component: sdpReport
+        },
+        {
+            path: '/task/:id/report',
+            name: 'report',
+            component: CheckProjectResult,
+            children:[
+                {
+                    path:"overviewlist",
+                    name:"overviewlist",
+                    component:OverviewList
+
+                },
+                {
+                    path:"issues",
+                    name:"issues",
+                    component:IssuesMain
+
+                }
+            ]
         }
     ]
 })
